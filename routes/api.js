@@ -25,7 +25,9 @@ router.put("/ninjas/:id", function (req, res, next) {
 
 // Delete request - Delete a ninja from the database
 router.delete("/ninjas/:id", function (req, res, next) {
-  res.send({ type: "DELETE" })
+  Ninja.findByIdAndRemove({ _id: req.params.id }).then(function (ninja) {
+    res.send(ninja);
+  });
 }); 
 
 // Export the routes
