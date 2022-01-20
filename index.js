@@ -15,6 +15,8 @@ mongoose
   .then((result) => console.log("Connected to db"))
   .catch((err) => console.log(err));
 
+// Use static middleware
+app.use(express.static('public'));
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -24,7 +26,6 @@ app.use('/api', require('./routes/api'));
 
 // Error handling middleware
 app.use(function (err, req, res, next) {
-  // console.log(err); - to test
   res.status(422).send({ error: err.message });
 });
 
