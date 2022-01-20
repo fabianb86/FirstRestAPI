@@ -1,7 +1,9 @@
 // Here will create all the routes for the api
 
+// Dependencies & files required
 const express = require("express");
 const router = express.Router();
+const Ninja = require("../models/ninja");
 
 // Get request - Get a list of ninjas from the database
 router.get("/ninjas", function (req, res) {
@@ -10,14 +12,10 @@ router.get("/ninjas", function (req, res) {
 
 // Post request - Add a new ninja to the database
 router.post("/ninjas", function (req, res) {
-  // Access to the body of the request
-  console.log(req.body);
-  res.send({
-    type: "POST",
-    // Send the body to the client
-    name: req.body.name,
-    rank: req.body.rank
-  });
+  Ninja.create(req.body)
+    .then(function (ninja) {
+      res.send(ninja);
+    });
 }); 
 
 // Put request - Update a ninja in the database
